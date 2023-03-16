@@ -6,10 +6,26 @@ class app(cmd.Cmd):
     prompt = " ~$ "
     
     def do_create(self, line):
-        print("Command Create\n")
+        if line != "":
+            with open("names.txt", "a") as file:
+                file.write(f"{line}\n")
+
+        else:
+            name = input("Name: ").strip()
+            with open("names.txt", "a") as file:
+                file.write(f"{name}\n")
+
+        print()
 
     def do_list(self, line):
-        print("Command List\n")
+        names = []
+        with open("names.txt") as file:
+            names = file.readlines()
+
+        for i in names:
+            print(f"{i}", end="")
+
+        print()
 
     def do_exit(self, line):
         print()
